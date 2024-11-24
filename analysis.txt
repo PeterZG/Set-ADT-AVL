@@ -1,0 +1,89 @@
+
+========================================================================
+                          Complexity Analysis
+========================================================================
+
+NOTE:
+- Your time complexities are expressed in big-O notation.
+- For operations involving a single set, complexities are in terms of n, 
+  where n is the number of elements in the set.
+- For operations involving two sets, complexities are in terms of n and m, 
+  where n and m are the number of elements in each of the sets respectively.
+
+--------
+SetUnion
+--------
+
+Worst case complexity: O(n + m)
+
+Explanation: This function traverses both sets to combine their elements. 
+Each set is fully iterated, making the overall complexity O(n + m).
+
+---------------
+SetIntersection
+---------------
+
+Worst case complexity: O(n + m)
+
+Explanation: This function traverses the elements of both sets to find 
+common elements. The complexity is O(n + m).
+
+-------------
+SetDifference
+-------------
+
+Worst case complexity: O(n + m)
+
+Explanation: This function traverses the elements of the first set 
+and checks for their absence in the second set. The complexity is O(n + m).
+
+---------
+SetEquals
+---------
+
+Worst case complexity: O(n + m)
+
+Explanation: This function uses SetUnion and SetDifference operations, 
+both of which are O(n + m). The combined logic ensures the total complexity 
+remains O(n + m).
+
+---------
+SetSubset
+---------
+
+Worst case complexity: O(n + m)
+
+Explanation: This function determines if one set is a subset of another 
+by traversing both sets. The complexity is O(n + m).
+
+--------
+SetFloor
+--------
+
+Worst case complexity: O(log n)
+
+Explanation: This function finds the largest element less than or equal to 
+a given value using an AVL tree. The search complexity is O(log n).
+
+----------
+SetCeiling
+----------
+
+Worst case complexity: O(log n)
+
+Explanation: Similar to SetFloor, this function finds the smallest element 
+greater than or equal to a given value using an AVL tree. The complexity is O(log n).
+
+========================================================================
+               Design Documentation for Cursor Operations
+========================================================================
+
+The cursor operations allow sequential traversal of set elements in sorted order.
+
+Design and Implementation:
+- The cursor is implemented as a stack to store nodes during an in-order traversal of the AVL tree.
+- SetCursorNew: Initializes the cursor and pushes the leftmost nodes onto the stack.
+- SetCursorNext: Pops the top node from the stack, processes it, and pushes its right subtree nodes if they exist.
+- The operations ensure that the traversal is efficient with a time complexity of O(1) for SetCursorNext for each element, and O(h) for initialization, where h is the height of the AVL tree.
+
+========================================================================
