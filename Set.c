@@ -525,16 +525,43 @@ int SetCeiling(Set s, int item) {
 /**
  * Creates a new cursor positioned at the smallest element of the set
  */
+// Initializes a cursor at the smallest element of the set
 SetCursor SetCursorNew(Set s) {
-	// TODO
-	return NULL;
+    if (s == NULL || s->tree == NULL) return NULL;
+
+    SetCursor cur = malloc(sizeof(struct cursor));
+    if (cur == NULL) {
+        fprintf(stderr, "Failed to allocate memory for cursor\n");
+        exit(EXIT_FAILURE);
+    }
+
+    cur->stack = malloc(sizeof(struct node *) * s->size);
+    if (cur->stack == NULL) {
+        free(cur);
+        fprintf(stderr, "Failed to allocate memory for cursor stack\n");
+        exit(EXIT_FAILURE);
+    }
+
+    cur->top = -1;
+    struct node *current = s->tree;
+
+    // Push all left nodes to the stack
+    while (current != NULL) {
+        cur->stack[++cur->top] = current;
+        current = current->left;
+    }
+
+    return cur;
 }
 
 /**
  * Frees all memory associated with the given cursor
  */
+// Frees all memory associated with the cursor
 void SetCursorFree(SetCursor cur) {
-	// TODO
+    if (cur == NULL) return;
+    free(cur->stack);
+    free(cur);
 }
 
 /**
@@ -543,9 +570,21 @@ void SetCursorFree(SetCursor cur) {
  * element, then all subsequent calls to SetCursorNext on this cursor
  * should return UNDEFINED.
  */
+// Returns the element at the cursor's current position and moves the cursor to the next
 int SetCursorNext(SetCursor cur) {
-	// TODO
-	return UNDEFINED;
+    if (cur == NULL || cur->top == -1) return UNDEFINED;
+
+    struct node *current = cur->stack[cur->top--];
+    int value = current->item;
+
+    // If the current node has a right child, push all left nodes of the right subtree to the stack
+    current = current->right;
+    while (current != NULL) {
+        cur->stack[++cur->top] = current;
+        current = current->left;
+    }
+
+    return value;
 }
 
 ////////////////////////////////////////////////////////////////////////
