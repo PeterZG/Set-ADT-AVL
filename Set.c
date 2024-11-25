@@ -1,5 +1,4 @@
 // Implementation of the Set ADT using a balanced BST
-// COMP2521 22T2 Assignment 1
 
 #include <assert.h>
 #include <stdbool.h>
