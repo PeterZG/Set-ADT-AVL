@@ -1,7 +1,7 @@
 
 # Set ADT Using AVL Tree
 
-This repository contains an implementation of a Set Abstract Data Type (ADT) using a balanced AVL tree as part of UNSW's COMP2521 22T2 Assignment 1. It demonstrates the implementation of standard set operations with efficient time complexity.
+This project contains an implementation of a Set Abstract Data Type (ADT) using a balanced AVL tree. It demonstrates the implementation of standard set operations with efficient time complexity.
 
 ## Features
 
